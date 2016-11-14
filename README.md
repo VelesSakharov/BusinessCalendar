@@ -12,6 +12,7 @@
  * Front-end application development
  * Learning and implementing web sockets to allow the server respond to the client without the client's request
  * Api development to facilitate access to the server-side Task Scheduler
+ * 
 ---
 * Тэкставае апісанне праекта работы
  * Проект разрабатывается с использованием фреймворка Ruby on Rails. В проекте используются следующие модели, необходимые для реализации основного функционала: User, Note. Допустимо создание других моделей, необходимых для реализации функционала. Для хранения проекта используется база данных PostgreSQL. Проект использует Ruby версии 2.3.1 и Rails 5.0. Для ролей Admin, Head и User используется CanCanCan. Для авторизации используется Device. Для верстки используется bootstrap. Для отправки уведомлений пользователю предполагается использованиие node.js.
@@ -22,7 +23,7 @@
  * content
  * appointment
 * Апісанне классаў у умл
- * ![Img](https://github.com/plufmua/BusinessCalendar/blob/master/models.JPG)
+ * ![Img](https://github.com/plufmua/BusinessCalendar/blob/master/models_rails.JPG)
 * Апісанне функцыянальных частак у выглядзе схемы
  * 
 * Тэхнічныя эксперыменты
