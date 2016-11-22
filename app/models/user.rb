@@ -12,12 +12,21 @@ class User < ApplicationRecord
     self.role = Role.find_by name: "User" if self.role.nil?
   end
 
-  def admin?
-    self.role.name == "Admin"
+  ROLES = %i(admin).freeze
+
+  def roles=(roles)
+    roles = [*roles].map(&:to_sym)
+    self.roles_mask = (roles & ROLES).map { |r| 2**ROLES.index(r) }.inject(0, :+)
   end
 
-  def head?
-    self.role.name == "Head"
+  def roles
+    ROLES.reject do |r|
+      ((roles_mask.to_i || 0) & 2**ROLES.index(r)).zero?
+    end
+  end
+
+  def has_role?(role)
+    roles.include?(role)
   end
 
 end

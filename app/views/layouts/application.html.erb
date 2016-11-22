@@ -17,8 +17,14 @@
       <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
   <% end %>
 
-  <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, id: "flash_#{name}" %>
+  <% flash.each do |type,message| %>
+      <div class="col-s1-8">
+        <div class="container">
+          <div class="alert <%= bootstrap_class_for(type) %> fade in">
+            <%= message %>
+          </div>
+        </div>
+      </div>
   <% end %>
     <%= yield %>
   </body>
