@@ -1,27 +1,23 @@
-<%= form_for(role) do |f| %>
-  <% if role.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(role.errors.count, "error") %> prohibited this role from being saved:</h2>
+<%= form_for(@role) do |f| %>
+    <% if @role.errors.any? %>
+        <div id="error_explanation">
+          <% @role.errors.full_messages.each do |message| %>
+              <%= flash[:alert] = message %>
+          <% end %>
+        </div>
+    <% end %>
 
-      <ul>
-      <% role.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+    <div class="field">
+      <span class="label label-default"><%= f.label :name %></span><br>
+      <%= f.text_field :name, class: 'form-control input-sm' %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
-  </div>
+    <div class="field">
+      <span class="label label-default"><%= f.label :description %></span><br>
+      <%= f.text_field :description, class: 'form-control input-sm' %>
+    </div>
 
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_field :description %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="actions">
+      <%= f.submit 'Submit', class: 'btn btn-success' %>
+    </div>
 <% end %>

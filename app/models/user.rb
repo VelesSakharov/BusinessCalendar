@@ -1,9 +1,11 @@
 class User < ApplicationRecord
+  ROLES = %i(admin).freeze
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  belongs_to :role
+  has_and_belongs_to_many :roles
   has_many :notes
   validates_presence_of :last_name
   before_save :assign_role
@@ -11,10 +13,8 @@ class User < ApplicationRecord
   validates :last_name, length: { in: 1..255 }
 
   def assign_role
-    self.role = Role.find_by name: "User" if self.role.nil?
+    self.role = Role.find_by(name: 'User') if role.nil?
   end
-
-  ROLES = %i(admin).freeze
 
   def roles=(roles)
     roles = [*roles].map(&:to_sym)
@@ -30,5 +30,4 @@ class User < ApplicationRecord
   def has_role?(role)
     roles.include?(role)
   end
-
 end

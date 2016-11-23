@@ -1,5 +1,6 @@
 <h1>Roles</h1>
 
+<div class="table-responsive">
 <table>
   <thead>
     <tr>
@@ -29,8 +30,9 @@
     <% end %>
   </tbody>
 </table>
+  </div>
 
 <br>
 <% if can? :create, Role %>
-  <%= link_to 'New Role', new_role_path %>
+  <%= link_to 'New Role', new_role_path, class: 'btn btn-default'  %>
 <% end %>

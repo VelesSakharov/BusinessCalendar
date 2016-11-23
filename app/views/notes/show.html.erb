@@ -1,17 +1,27 @@
-<p>
-  <strong>Title:</strong>
-  <%= @note.title %>
-</p>
+<h1>Note info</h1>
 
-<p>
-  <strong>Content:</strong>
-  <%= @note.content %>
-</p>
+<div class="col-sm-8">
+  <table class="table table-default">
+    <tr>
+      <td>Title:</td>
+      <td><%= @note.title %></td>
+    </tr>
 
-<p>
-  <strong>Appointment:</strong>
-  <%= @note.appointment %>
-</p>
+    <tr>
+      <td>Content:</td>
+      <td><%= @note.content %></td>
+    </tr>
 
-<%= link_to 'Edit', edit_note_path(@note) %> |
-<%= link_to 'Back', notes_path %>
+    <tr>
+      <td>Appointment:</td>
+      <td><%= @note.appointment %></td>
+    </tr>
+  </table>
+
+  <div class="btn btn-group">
+    <% if can? :update, @project %>
+        <%= link_to 'Edit', edit_note_path(@note), class: 'btn btn-default' %>
+    <% end %>
+    <%= link_to 'Back', notes_path, class: 'btn btn-default' %>
+  </div>
+</div>

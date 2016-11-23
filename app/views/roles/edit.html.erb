@@ -1,6 +1,10 @@
 <h1>Editing Role</h1>
 
-<%= render 'form', role: @role %>
+<div class="col-sm-8">
+  <%= render 'form', role: @role %>
 
-<%= link_to 'Show', @role %> |
-<%= link_to 'Back', roles_path %>
+  <div class="btn-group btn-group">
+    <%= link_to 'Show', @role, class: 'btn btn-default' %>
+    <%= link_to 'Back', roles_path, class: 'btn btn-default' %>
+  </div>
+</div>
