@@ -8,13 +8,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :roles
   has_many :notes
   validates_presence_of :last_name
-  before_save :assign_role
   validates :first_name, presence: true, length: { in: 1..255 }
   validates :last_name, length: { in: 1..255 }
-
-  def assign_role
-    self.role = Role.find_by(name: 'User') if role.nil?
-  end
 
   def roles=(roles)
     roles = [*roles].map(&:to_sym)
@@ -28,6 +23,6 @@ class User < ApplicationRecord
   end
 
   def has_role?(role)
-    roles.include?(role)
+    roles.find_by_name(role) ? true : false
   end
 end
