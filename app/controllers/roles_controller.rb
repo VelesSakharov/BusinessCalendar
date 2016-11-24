@@ -12,10 +12,10 @@ class RolesController < ApplicationController
   # GET /roles/1
   # GET /roles/1.json
   def show
-    if @role.users.length == 0
-      @assosciated_users = "None"
+    if @role.users.length.zero?
+      @assosciated_users = 'None'
     else
-      @assosciated_users = @role.users.map(&:name).join(", ")
+      @assosciated_users = @role.users.limit(10).map(&:name).join(', ')
     end
   end
 
@@ -69,13 +69,14 @@ class RolesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_role
-      @role = Role.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def role_params
-      params.require(:role).permit(:name, :description)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_role
+    @role = Role.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def role_params
+    params.require(:role).permit(:name, :description)
+  end
 end

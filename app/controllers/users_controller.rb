@@ -16,7 +16,7 @@ class UsersController < ApplicationController
     if @user.current_sign_in_at
       @last_login = @user.current_sign_in_at.to_formatted_s(:short)
     else
-      @last_login = "never"
+      @last_login = 'never'
     end
   end
 
@@ -81,18 +81,20 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    def needs_password?(user, params)
-      params[:password].present?
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+  def needs_password?(_user, params)
+    params[:password].present?
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :role_id)
   end
+  ROLES = %i(admin).freeze
 end

@@ -1,30 +1,42 @@
-<p>
-  <strong>Name:</strong>
-  <%= @user.first_name %>
-</p>
+<h1>User info</h1>
 
-<p>
-  <strong>Lastname:</strong>
-  <%= @user.last_name %>
-</p>
+<div class="col-sm-8">
+  <table class="table table-default">
+    <tr>
+      <td>Firstname:</td>
+      <td><%= @user.first_name %></td>
+    </tr>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+    <tr>
+      <td>Lastname:</td>
+      <td><%= @user.last_name %></td>
+    </tr>
 
-<p>
-  <strong>Joined on:</strong>
-  <%= @joined_on %>
-</p>
-<p>
-  <strong>Last logged in on:</strong>
-  <%= @last_login %>
-</p>
-<p>
-  <strong>No. times logged in:</strong>
-  <%= @user.sign_in_count %>
-</p>
+    <tr>
+      <td>Email:</td>
+      <td><%= @user.email %></td>
+    </tr>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+    <tr>
+      <td>Joined on:</td>
+      <td><%= @joined_on %></td>
+    </tr>
+
+    <tr>
+      <td>Last login:</td>
+      <td><%= @last_login %></td>
+    </tr>
+
+    <tr>
+      <td>No. times logged in:</td>
+      <td><%= @user.sign_in_count %></td>
+    </tr>
+  </table>
+
+  <div class="btn btn-group">
+    <% if can? :update, @project %>
+        <%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-default' %>
+    <% end %>
+    <%= link_to 'Back', users_path, class: 'btn btn-default' %>
+  </div>
+</div>

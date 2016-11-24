@@ -1,6 +1,10 @@
 <h1>Editing User</h1>
 
-<%= render 'form', user: @user %>
+<div class="col-sm-8">
+  <%= render 'form', user: @user %>
 
-<%= link_to 'Show', @user %> |
-<%= link_to 'Back', users_path %>
+  <div class="btn-group btn-group">
+    <%= link_to 'Show', @user, class: 'btn btn-default' %>
+    <%= link_to 'Back', users_path, class: 'btn btn-default' %>
+  </div>
+</div>
