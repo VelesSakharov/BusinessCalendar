@@ -1,0 +1,25 @@
+%h1 User info
+.col-sm-8
+  %table.table.table-default
+    %tr
+      %td Firstname:
+      %td= @user.first_name
+    %tr
+      %td Lastname:
+      %td= @user.last_name
+    %tr
+      %td Email:
+      %td= @user.email
+    %tr
+      %td Joined on:
+      %td= @joined_on
+    %tr
+      %td Last login:
+      %td= @last_login
+    %tr
+      %td No. times logged in:
+      %td= @user.sign_in_count
+  .btn.btn-group
+    - if can? :update, @project
+      = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default'
+    = link_to 'Back', users_path, class: 'btn btn-default'

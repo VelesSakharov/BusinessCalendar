@@ -1,0 +1,7 @@
+%h1
+  Editing User
+%div.col-sm-8
+  =render 'form', user: @user
+  %div{class: 'btn-group btn-group'}
+    =link_to 'Show', @user, {class: 'btn btn-default'}
+    =link_to 'Back', users_path, {class: 'btn btn-default'}

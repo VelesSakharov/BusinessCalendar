@@ -1,0 +1,16 @@
+=form_for(@role) do |f|
+  -if @role.errors.any?
+    %div{id: "error_explanation"}
+      -@role.errors.full_messages.each do |message|
+        =flash[:alert]=message
+
+  %div.field
+    =f.label :name, {class: "label label-default"}
+    =f.text_field :name, {class: 'form-control input-sm'}
+
+  %div.field
+    =f.label :description, {class: "label label-default"}
+    =f.text_area :description, {class: 'form-control input-sm'}
+
+    %div.actions
+      =f.submit 'Submit', class: 'btn btn-success'

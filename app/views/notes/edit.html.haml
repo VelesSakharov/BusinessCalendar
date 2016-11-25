@@ -1,0 +1,7 @@
+%h1
+  Editing Note
+%div.col-sm-8
+  =render 'form', note: @note
+  %div{class: 'btn-group btn-group'}
+    =link_to 'Show', @note, {class: 'btn btn-default'}
+    =link_to 'Back', notes_path, {class: 'btn btn-default'}
