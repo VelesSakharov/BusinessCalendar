@@ -1,0 +1,16 @@
+%h1 Note info
+.col-sm-8
+  %table.table.table-default
+    %tr
+      %td Title:
+      %td= @note.title
+    %tr
+      %td Content:
+      %td= @note.content
+    %tr
+      %td Appointment:
+      %td= @note.appointment
+  .btn.btn-group
+    - if can? :update, @project
+      = link_to 'Edit', edit_note_path(@note), class: 'btn btn-default'
+    = link_to 'Back', notes_path, class: 'btn btn-default'

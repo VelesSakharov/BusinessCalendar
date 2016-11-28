@@ -1,0 +1,7 @@
+%h1
+  Editing Role
+%div.col-sm-8
+  =render 'form', role: @role
+  %div{class: 'btn-group btn-group'}
+    =link_to 'Show', @role, {class: 'btn btn-default'}
+    =link_to 'Back', roles_path, {class: 'btn btn-default'}
