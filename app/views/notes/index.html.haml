@@ -1,25 +1,39 @@
 %h1 Notes
-.table-responsive
-  %table.table
-    %thead
-      %tr
-        %th Name
-        %th Content
-        %th{:colspan => "3"}
-    %tbody
-      - @notes.each do |note|
-        %tr
-          %td= note.title
-          %td= note.content
-          %td= note.appointment
-          %td= link_to 'Show', note
-          %td
-            - if can? :update, note
-              = link_to 'Edit', edit_note_path(note)
-          %td
-            - if can? :destroy, note
-              = link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }
-      = paginate @notes
-%br
+
+%div{id: "notes"}
+  %h2{ style: 'text-align: center', id: "month"}
+    = link_to "<", date: @date.prev_month
+    = @date.strftime("%B %Y")
+    = link_to ">", date: @date.next_month
+
+  = calendar @date do |date|
+    = date.day
+    -if @notes_by_date[date]
+      %ul
+        = @notes_by_date[date].each do |note|
+          %li= link_to note.name, note
+
+-#.table-responsive
+-#  %table.table
+-#    %thead
+-#      %tr
+-#        %th Name
+-#        %th Content
+-#        %th{:colspan => "3"}
+-#    %tbody
+-#      - @notes.each do |note|
+-#        %tr
+-#          %td= note.title
+-#          %td= note.content
+-#          %td= note.appointment
+-#          %td= link_to 'Show', note
+-#          %td
+-#            - if can? :update, note
+-#              = link_to 'Edit', edit_note_path(note)
+-#          %td
+-#            - if can? :destroy, note
+-#              = link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' }
+-#      = paginate @notes
+-#%br
 - if can? :create, Note
   = link_to 'New Note', new_note_path, class: 'btn btn-default'

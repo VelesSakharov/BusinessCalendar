@@ -18,6 +18,6 @@
           %td
             - if can? :destroy, role
               = link_to 'Destroy', role, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+%br
 - if can? :create, Role
   = link_to 'New Role', new_role_path, class: 'btn btn-default'
