@@ -8,10 +8,10 @@
 
   = calendar @date do |date|
     = date.day
-    -if @notes_by_date[date]
+    = if @notes_by_date[date]
       %ul
         = @notes_by_date[date].each do |note|
-          %li= link_to note.name, note
+          %li= link_to note.title, note
 
 -#.table-responsive
 -#  %table.table
