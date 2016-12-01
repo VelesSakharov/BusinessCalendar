@@ -12,10 +12,13 @@
     =f.label :content, {class: "label label-default"}
     =f.text_area :content, {class: 'form-control input-sm'}
 
-    %div.field
-      =f.label :appointment, {class: "label label-default"}
-      %br
-      =f.datetime_select :appointment, {class: 'form-control input-sm'}
+  %div.field
+    =f.label :appointment, {class: "label label-default"}
+    %br
+    =f.text_field :appointment, {class: 'datetimefield'}
 
-    %div.actions
-      =f.submit 'Submit', class: 'btn btn-success'
+  %div.actions
+    =f.submit 'Submit', class: 'btn btn-success'
+
+  %script
+    $('datetimefield').AnyTime_picker({format: '%W, %M %D %z, %H:%i', firstDOW: 0});

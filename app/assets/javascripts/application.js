@@ -13,4 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require jquery-ui
+//= require anytime/main
+//= require anytime/timezone
 //= require_tree .
