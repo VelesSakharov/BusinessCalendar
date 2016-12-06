@@ -33,7 +33,9 @@ gem 'jbuilder', '~> 2.5'
 gem 'factory_girl_rails', require: false
 gem 'faker', require: false
 gem 'kaminari'
-
+gem 'sidekiq'
+gem 'momentjs-rails'
+gem 'bootstrap3-datetimepicker-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

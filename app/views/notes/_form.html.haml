@@ -14,7 +14,18 @@
 
   %div.field
     =f.label :appointment, {class: "label label-default"}
-    %br
+    -#%br
+    -#  .row
+    -#    .form-group
+    -#      #datetimepicker1.input-group.date'
+    -#        %input.form-control{type: 'text'}
+    -#        %span.input-group-addon
+    -#          %span.glyphicon.glyphicon-calendar
+    -#    :javascript
+    -#      $(function () {
+    -#        $('#datetimepicker1').datetimepicker();
+    -#      });.container
+
     =f.datetime_select :appointment, {class: 'form-control input-sm'}
 
   %div.actions
