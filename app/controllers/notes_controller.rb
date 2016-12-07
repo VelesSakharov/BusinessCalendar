@@ -6,9 +6,9 @@ class NotesController < ApplicationController
   # GET /notes
   # GET /notes.json
   def index
-    @notes = Note.page(params[:page]).per(5)
+    @notes = Note.all
     @notes_by_date = @notes.group_by(&:appointment)
-    @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    @date = params[:appointment] ? Date.parse(params[:appointment]) : Date.today
   end
 
   # GET /notes/1

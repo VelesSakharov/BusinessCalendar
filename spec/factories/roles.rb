@@ -1,6 +1,10 @@
+require 'faker'
+
+
 FactoryGirl.define do
   factory :role do
-    name 'MyString'
-    description 'MyString'
+    name {Faker::App.name}
+    description {Faker::Hacker.say_something_smart}
+
   end
 end
