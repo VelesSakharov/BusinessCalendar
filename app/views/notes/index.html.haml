@@ -1,13 +1,13 @@
 %h1 Notes
 
 %div{id: "notes"}
-  %h2{ style: 'text-align: center', id: "month"}
-    = link_to "<", date: @date.prev_month
-    = @date.strftime("%B %Y")
-    = link_to ">", date: @date.next_month
+  %h2{ style: 'text-align: center', id: 'month'}
+    = link_to '<', date: @date.prev_month
+    = @date.strftime('%B %Y')
+    = link_to '>', date: @date.next_month
 
-  = calendar @date do |date|
-    = date.day
+  = calendar(@date) do |date|
+    = date.strftime('%Y-%m-%d').day
     - if @notes_by_date[date]
       %ul
         = @notes_by_date[date].each do |note|

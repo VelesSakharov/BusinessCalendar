@@ -1,5 +1,5 @@
 class NotesController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
@@ -8,7 +8,7 @@ class NotesController < ApplicationController
   def index
     @notes = Note.all
     @notes_by_date = @notes.group_by(&:appointment)
-    @date = params[:appointment] ? Date.parse(params[:appointment]) : Date.today
+    @date = params[:date] ? DateTime.parse(params[:date]) : DateTime.today
   end
 
   # GET /notes/1
@@ -30,7 +30,6 @@ class NotesController < ApplicationController
   def create
     @note = Note.new(note_params)
     @note.user_id = current_user.id
-
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
@@ -75,6 +74,6 @@ class NotesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_params
-    params.require(:note).permit(:title, :content, :appointment)
+    params.require(:note).permit(:title, :content, :appointment, :date)
   end
 end
