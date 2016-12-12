@@ -9,9 +9,8 @@
   = calendar(@date) do |date|
     = date.day
     - if @notes_by_date[date]
-      %ul
-        = @notes_by_date[date].each do |note|
-          %li= link_to note.title, note
+      - @notes_by_date[date].each do |note|
+        %li= link_to note.title, note
 
 - if can? :create, Note
   = link_to 'New Note', new_note_path, class: 'btn btn-default'
