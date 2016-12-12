@@ -6,6 +6,7 @@ class CreateNotes < ActiveRecord::Migration[5.0]
       t.text :content, limit: 1023
       t.datetime :appointment
       t.belongs_to :user, index: true
+      t.date :date_appointment
 
       t.timestamps
     end

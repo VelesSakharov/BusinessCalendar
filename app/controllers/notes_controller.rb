@@ -8,7 +8,7 @@ class NotesController < ApplicationController
   # GET /notes.json
   def index
     @notes = Note.all
-    @notes_by_date = @notes.group_by(&:appointment)
+    @notes_by_date = @notes.group_by(&:date_appointment)
     @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
 
@@ -30,6 +30,7 @@ class NotesController < ApplicationController
   # POST /notes.json
   def create
     @note = Note.new(note_params)
+    @note.date_appointment = @note.appointment.to_date
     @note.user_id = current_user.id
     respond_to do |format|
       if @note.save
@@ -75,6 +76,6 @@ class NotesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_params
-    params.require(:note).permit(:title, :content, :appointment, :date)
+    params.require(:note).permit(:title, :content, :appointment, :date, :date_appointment)
   end
 end
