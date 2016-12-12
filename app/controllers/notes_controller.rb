@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class NotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
@@ -8,7 +9,7 @@ class NotesController < ApplicationController
   def index
     @notes = Note.all
     @notes_by_date = @notes.group_by(&:appointment)
-    @date = params[:date] ? DateTime.parse(params[:date]) : DateTime.today
+    @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
 
   # GET /notes/1
