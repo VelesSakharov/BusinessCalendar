@@ -10,8 +10,8 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.head?
-      can :read, Note
-      can :create, Note
+      can :read, :all
+      can :create, :all
       can :update, Note do |note|
         note.try(:user) == user
       end
@@ -19,7 +19,16 @@ class Ability
         note.try(:user) == user
       end
     else
-      can :read, :all
+      can :read, Note do |note|
+        note.try(:user) == user
+      end
+      can :create, Note
+      can :update, Note do |note|
+        note.try(:user) == user
+      end
+      can :destroy, Note do |note|
+        note.try(:user) == user
+      end
     end
     #
     # The first argument to `can` is the action you are giving the user
