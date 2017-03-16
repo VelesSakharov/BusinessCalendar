@@ -1,0 +1,16 @@
+%h1 Role info
+.col-sm-8
+  %table.table.table-default
+    %tr
+      %td Name:
+      %td= @role.name
+    %tr
+      %td Description:
+      %td= @role.description
+    %tr
+      %td Assosciated users:
+      %td= @assosciated_users
+  .btn.btn-group
+    - if can? :update, @project
+      = link_to 'Edit', edit_role_path(@role), class: 'btn btn-default'
+    = link_to 'Back', roles_path, class: 'btn btn-default'

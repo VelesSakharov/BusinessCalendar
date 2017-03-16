@@ -1,0 +1,32 @@
+=form_for(@note) do |f|
+  -if @note.errors.any?
+    %div{id: "error_explanation"}
+      -@note.errors.full_messages.each do |message|
+        =flash[:alert]=message
+
+  %div.field
+    =f.label :title, {class: "label label-default"}
+    =f.text_field :title, {class: 'form-control input-sm'}
+
+  %div.field
+    =f.label :content, {class: "label label-default"}
+    =f.text_area :content, {class: 'form-control input-sm'}
+
+  %div.field
+    =f.label :appointment, {class: "label label-default"}
+    -#%br
+    -#  .row
+    -#    .form-group
+    -#      #datetimepicker1.input-group.date'
+    -#        %input.form-control{type: 'text'}
+    -#        %span.input-group-addon
+    -#          %span.glyphicon.glyphicon-calendar
+    -#    :javascript
+    -#      $(function () {
+    -#        $('#datetimepicker1').datetimepicker();
+    -#      });.container
+
+    =f.datetime_select :appointment, {class: 'form-control input-sm'}
+
+  %div.actions
+    =f.submit 'Submit', class: 'btn btn-success'

@@ -1,0 +1,6 @@
+%h1
+  New Note
+
+%div{class: "col-sm-8"}
+  = render 'form', note: @note
+  =link_to 'Back', notes_path, {class: 'btn btn-default'}

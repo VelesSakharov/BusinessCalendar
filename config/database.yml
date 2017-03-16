@@ -1,0 +1,40 @@
+# PostgreSQL. Versions 9.1 and up are supported.
+#
+# Install the pg driver:
+#   gem install pg
+# On OS X with Homebrew:
+#   gem install pg -- --with-pg-config=/usr/local/bin/pg_config
+# On OS X with MacPorts:
+#   gem install pg -- --with-pg-config=/opt/local/lib/postgresql84/bin/pg_config
+# On Windows:
+#   gem install pg
+#       Choose the win32 build.
+#       Install PostgreSQL and put its /bin directory on your path.
+#
+# Configure Using Gemfile
+# gem 'pg'
+#
+#Sidekiq.configure_server do |config|
+#  config.redis = { url: 'redis://redis.example.com:6379/12', namespace: 'mynamespace' }
+#
+#  database_url = ENV['DATABASE_URL']
+#  if database_url
+#    ENV['DATABASE_URL'] = "#{database_url}?pool=25"
+#    ActiveRecord::Base.establish_connection
+#    # Note that as of Rails 4.1 the `establish_connection` method requires
+#    # the database_url be passed in as an argument. Like this:
+#    # ActiveRecord::Base.establish_connection(ENV['DATABASE_URL'])
+#  end
+#end
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  # For details on connection pooling, see rails configuration guide
+  # http://guides.rubyonrails.org/configuring.html#database-pooling
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: business_calendar_development
+  username: <%= ENV['DATABASE_LOGIN'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
