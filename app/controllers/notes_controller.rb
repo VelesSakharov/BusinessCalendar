@@ -18,7 +18,7 @@ class NotesController < ApplicationController
   end
 
   def get_notes
-    return @telegram_notes = Note.all
+    @telegram_notes = Note.all
   end
 
   # GET /notes/new
@@ -38,7 +38,8 @@ class NotesController < ApplicationController
     @note.user_id = current_user.id
     respond_to do |format|
       if @note.save
-        Worker.new(@note)
+        # Worker.new(@note)
+        # @telegram = TelegramWebhooksController.new(current_user.telegram_id)
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else

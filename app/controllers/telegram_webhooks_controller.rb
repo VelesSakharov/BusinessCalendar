@@ -2,10 +2,14 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   include Telegram::Bot::UpdatesController::MessageContext
   context_to_action!
 
+  # def initialize(user_id)
+  #   SendNotes.perform_async
+  #   notificate_user(user_id)
+  # end
 
   def start(*args)
     keyboard
-    respond_with :message, text: "Your userID is #{from['id']}"
+    respond_with :message, text: "Please enter that value in User edit page: #{from['id']}"
   end
 
   def help(*args)
@@ -15,6 +19,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
       /memo %text% - Saves text to session.
       /remind - Replies with text from session.
     TXT
+    notificate_user(203145186)
   end
 
   def memo(*args)
@@ -28,8 +33,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def remind
-    @reply = TelegramService.new.get_notes
-    respond_with :message, text: @reply
+    @replies = TelegramService.new.get_notes
+    @replies.each do |reply|
+      respond_with :message, text: "Title: #{reply[:title]}; Content: #{reply[:content]}; Appointment: #{reply[:appointment]}"
+    end
   end
 
   def keyboard(value = nil, *)
@@ -44,6 +51,15 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
           one_time_keyboard: false,
           selective: true
       }
+    end
+  end
+
+  def notificate_user(telegram_user_id)
+    @replies = TelegramService.new.get_notes
+    @replies.each do |reply|
+      pp bot
+      pp bot.send_message(text: "Title: #{reply[:title]}; Content: #{reply[:content]}; Appointment: #{reply[:appointment]}",
+                     chat_id: telegram_user_id)
     end
   end
 

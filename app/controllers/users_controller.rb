@@ -2,12 +2,17 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  #load_and_authorize_resource
 
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if current_user.admin?
+      @users = User.all
+    else
+      @users = User.find([current_user.id])
+    end
+    pp @users
   end
 
   # GET /users/1
@@ -95,7 +100,7 @@ class UsersController < ApplicationController
   # Never trust parameters from the scary internet, only allow the white list through.
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :role_id)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :role_id, :telegram_id)
   end
   ROLES = %i(admin).freeze
 end
