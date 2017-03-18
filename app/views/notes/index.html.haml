@@ -12,11 +12,13 @@
       - @notes_by_date[date].each do |note|
         .container-fluid
           -if note.appointment < Time.now
-            %li= link_to note.title, note, {style:'color: red;', class: "css_class"}
-            = note.appointment.strftime("%H:%M")
+            %li= note.appointment.strftime("%H:%M")
+            = link_to note.title, note, {style:'color: red;', class: "css_class"}
+
           -if note.appointment >= Time.now
-            %li= link_to note.title, note, {style:'color: green;', class: "css_class"}
-            = note.appointment.strftime("%H:%M")
+            %li= note.appointment.strftime("%H:%M")
+            = link_to note.title, note, {style:'color: green;', class: "css_class"}
+
 
 - if can? :create, Note
   = link_to 'New Note', new_note_path, class: 'btn btn-default'
