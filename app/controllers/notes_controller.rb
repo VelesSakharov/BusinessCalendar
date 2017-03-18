@@ -54,6 +54,8 @@ class NotesController < ApplicationController
   def update
     respond_to do |format|
       if @note.update(note_params)
+        # @note.date_appointment = @note.appointment.to_date
+        @note.update_attributes!(date_appointment: @note.appointment.to_date)
         format.html { redirect_to @note, notice: 'Note was successfully updated.' }
         format.json { render :show, status: :ok, location: @note }
       else

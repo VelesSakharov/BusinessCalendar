@@ -8,8 +8,19 @@ class TelegramService
 
   def get_notes
     @telegram_notes = []
+    @notes = @notes.sort_by {|obj| obj.date_appointment}
     @notes.each do |note|
       @telegram_notes.push format_notes(note)
+    end
+    @telegram_notes
+  end
+  def get_new_notes
+    @telegram_notes = []
+    @notes = @notes.sort_by {|obj| obj.date_appointment}
+    @notes.each do |note|
+      if note.appointment >= Time.now
+        @telegram_notes.push format_notes(note)
+      end
     end
     @telegram_notes
   end

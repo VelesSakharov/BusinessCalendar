@@ -12,7 +12,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     respond_with :message, text: "Please enter that value in User edit page: #{from['id']}"
   end
 
-  def help(*args)
+  def all(*args)
     respond_with :message, text: <<-TXT.strip_heredoc
       Available cmds:
       /keyboard - Opens keyboard with shortcuts
@@ -33,9 +33,9 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def remind
-    @replies = TelegramService.new.get_notes
+    @replies = TelegramService.new.get_new_notes
     @replies.each do |reply|
-      respond_with :message, text: "Title: #{reply[:title]}; Content: #{reply[:content]}; Appointment: #{reply[:appointment]}"
+      respond_with :message, text: "#{reply[:title]}: #{reply[:content]}! Appointment: #{reply[:appointment]}"
     end
   end
 
@@ -45,7 +45,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
     else
       save_context :keyboard
       respond_with :message, text: "Now You're using keyboard", reply_markup: {
-          keyboard:[ %W(/help /keyboard /remind)
+          keyboard:[ %W(/all /keyboard /remind)
           ],
           resize_keyboard: true,
           one_time_keyboard: false,
@@ -57,8 +57,7 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def notificate_user(telegram_user_id)
     @replies = TelegramService.new.get_notes
     @replies.each do |reply|
-      pp bot
-      pp bot.send_message(text: "Title: #{reply[:title]}; Content: #{reply[:content]}; Appointment: #{reply[:appointment]}",
+      bot.send_message(text: "Title: #{reply[:title]}; Content: #{reply[:content]}; Appointment: #{reply[:appointment]}",
                      chat_id: telegram_user_id)
     end
   end
