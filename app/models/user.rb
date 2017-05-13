@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 class User < ApplicationRecord
-  ROLES = %i(admin).freeze
+  ROLES = %i(admin moderator user banned).freeze
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

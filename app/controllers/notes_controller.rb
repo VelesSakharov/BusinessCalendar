@@ -1,19 +1,20 @@
-# frozen_string_literal: true
 class NotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
 
-  # GET /notes
-  # GET /notes.json
   def index
-    @notes = Note.all
+    @notes = Note.where(user_id: current_user)
     @notes_by_date = @notes.group_by(&:date_appointment)
     @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
 
-  # GET /notes/1
-  # GET /notes/1.json
+  def all_notes
+    @notes = (current_user.admin? || current_user.head? ) ? Note.all : Note.where(user_id: current_user)
+    @notes_by_date = @notes.group_by(&:date_appointment)
+    @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
+  end
+
   def show
   end
 
@@ -21,17 +22,13 @@ class NotesController < ApplicationController
     @telegram_notes = Note.all
   end
 
-  # GET /notes/new
   def new
     @note = Note.new
   end
 
-  # GET /notes/1/edit
   def edit
   end
 
-  # POST /notes
-  # POST /notes.json
   def create
     @note = Note.new(note_params)
     @note.date_appointment = @note.appointment.to_date
@@ -49,8 +46,6 @@ class NotesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /notes/1
-  # PATCH/PUT /notes/1.json
   def update
     respond_to do |format|
       if @note.update(note_params)
@@ -65,8 +60,6 @@ class NotesController < ApplicationController
     end
   end
 
-  # DELETE /notes/1
-  # DELETE /notes/1.json
   def destroy
     @note.destroy
     respond_to do |format|

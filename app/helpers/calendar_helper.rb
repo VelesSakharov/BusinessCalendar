@@ -1,4 +1,3 @@
-# frozen_string_literal: true
 module CalendarHelper
   def calendar(date = DateTime.today, &block)
     Calendar.new(self, date, block).table
