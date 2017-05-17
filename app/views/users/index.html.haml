@@ -10,7 +10,7 @@
     %tbody
       - @users.each do |user|
         %tr
-          %td= user.first_name
+          %td= link_to "#{user.first_name}", notes_path
           %td= user.last_name
           %td= user.email
           %td= link_to 'Show', user

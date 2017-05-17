@@ -5,6 +5,8 @@ source 'https://rubygems.org'
 gem 'rails', '~> 5.0.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.20'
+gem 'redis'
+gem 'delayed_job_active_record'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -34,7 +36,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'factory_girl_rails', require: false
 gem 'faker', require: false
 gem 'kaminari'
-gem 'sidekiq'
+gem 'sidekiq-scheduler'
 gem 'momentjs-rails'
 gem 'bootstrap3-datetimepicker-rails'
 gem 'telegram-bot'

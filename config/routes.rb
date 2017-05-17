@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :notes do
     collection do
       get :all_notes
+      get :get_user_notes
     end
   end
   root to: 'notes#index'

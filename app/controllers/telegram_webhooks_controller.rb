@@ -10,19 +10,32 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   def start(*args)
     keyboard
     respond_with :message, text: "Please enter that value in User edit page: #{from['id']}"
+    users = User.all
+    @user_id = users.where(telegram_id: update['message']['from']['id']).ids
+    notes = Note.where(user_id: @user_id)
+    notes.each do |note|
+      if (Time.now < note.appointment.to_datetime)
+        left = (Time.now - note.appointment.to_datetime).abs.round
+        pp left
+        sleep(left)
+        pp "111111111111111111111"
+      end
+    end
   end
 
   def all(*args)
     respond_with :message, text: <<-TXT.strip_heredoc
       Available cmds:
+      /start - Restarts chat with server(only for updates)
       /keyboard - Opens keyboard with shortcuts
       /memo %text% - Saves text to session.
       /remind - Replies with text from session.
     TXT
-    notificate_user(203145186)
+    #notificate_user(203145186)
   end
 
   def memo(*args)
+
     if args.any?
       session[:memo] = args
       respond_with :message, text:  "Memo'd #{args}"
@@ -33,6 +46,10 @@ class TelegramWebhooksController < Telegram::Bot::UpdatesController
   end
 
   def remind
+    redis = Redis.new
+    redis.set("#{@user_id}", )
+    redis.set('foo1', 'bar1')
+    pp redis.get(@user_id)
     @replies = TelegramService.new.get_new_notes
     @replies.each do |reply|
       respond_with :message, text: "#{reply[:title]}: #{reply[:content]}! Appointment: #{reply[:appointment]}"

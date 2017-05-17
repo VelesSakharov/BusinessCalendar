@@ -2,6 +2,7 @@ class NotesController < ApplicationController
   before_action :authenticate_user!
   before_action :set_note, only: [:show, :edit, :update, :destroy]
   load_and_authorize_resource
+  layout 'notes', only: [:index]
 
   def index
     @notes = Note.where(user_id: current_user)
@@ -11,6 +12,12 @@ class NotesController < ApplicationController
 
   def all_notes
     @notes = (current_user.admin? || current_user.head? ) ? Note.all : Note.where(user_id: current_user)
+    @notes_by_date = @notes.group_by(&:date_appointment)
+    @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
+  end
+
+  def get_user_notes(user_id)
+    @notes = (current_user.admin? || current_user.head? ) ? Note.all : Note.where(user_id: user_id)
     @notes_by_date = @notes.group_by(&:date_appointment)
     @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
@@ -29,14 +36,12 @@ class NotesController < ApplicationController
   def edit
   end
 
-  def create
+  def create(*args)
     @note = Note.new(note_params)
     @note.date_appointment = @note.appointment.to_date
-    @note.user_id = current_user.id
+    @note.user_id = (args.present?) ? args : current_user.id
     respond_to do |format|
       if @note.save
-        # Worker.new(@note)
-        # @telegram = TelegramWebhooksController.new(current_user.telegram_id)
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
         format.json { render :show, status: :created, location: @note }
       else
@@ -73,6 +78,7 @@ class NotesController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_note
     @note = Note.find(params[:id])
+    redis = Redis.new
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

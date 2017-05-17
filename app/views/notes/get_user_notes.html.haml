@@ -1,0 +1,24 @@
+%h1 Notes
+
+%div{id: "notes"}
+  %h2{ style: 'text-align: center', id: 'month'}
+    = link_to '<', date: @date.prev_month
+    = @date.strftime('%B %Y')
+    = link_to '>', date: @date.next_month
+
+  = calendar(@date) do |date|
+    = date.day
+    - if (@notes_by_date[date])
+      - @notes_by_date[date].each do |note|
+        .container-fluid
+          -if note.appointment < Time.now
+            %li= note.appointment.strftime("%H:%M")
+            = link_to note.title, note, {style:'color: red;', class: "css_class"}
+
+          -if note.appointment >= Time.now
+            %li= note.appointment.strftime("%H:%M")
+            = link_to note.title, note, {style:'color: green;', class: "css_class"}
+
+
+- if can? :create, Note
+  = link_to 'New Note', new_note_path, class: 'btn btn-default'
