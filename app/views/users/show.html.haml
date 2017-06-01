@@ -23,4 +23,4 @@
     - if can? :update, @project
       = link_to 'Edit', edit_user_path(@user), class: 'btn btn-default'
     = link_to 'Back', users_path, class: 'btn btn-default'
-    = link_to 'Add note', new_note_path, class: 'btn btn-default'
+    = link_to 'Add note', new_note_path(@user.id), class: 'btn btn-default'

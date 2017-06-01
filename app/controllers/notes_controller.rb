@@ -22,12 +22,6 @@ class NotesController < ApplicationController
     @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
 
-  def add_note_to_user(user_id)
-    @notes = (current_user.admin? || current_user.head? ) ? Note.all : Note.where(user_id: user_id)
-    @notes_by_date = @notes.group_by(&:date_appointment)
-    @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
-  end
-
   def show
   end
 
