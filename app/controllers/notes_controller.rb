@@ -35,8 +35,9 @@ class NotesController < ApplicationController
     @telegram_notes = Note.all
   end
 
-  def new
+  def new(user_id = current_user.id)
     @note = Note.new
+    @note.user_id = user_id
   end
 
   def edit

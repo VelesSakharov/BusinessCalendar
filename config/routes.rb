@@ -10,10 +10,6 @@ Rails.application.routes.draw do
       get :all_notes
       get :get_user_notes
     end
-    member do
-      get :add_note_to_user
-      post :add_note_to_user
-    end
   end
   resources :application do
     collection do
