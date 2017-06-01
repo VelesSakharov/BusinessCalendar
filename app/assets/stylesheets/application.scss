@@ -41,7 +41,7 @@
   background-color: #555;
   color: white;
   position: absolute;
-  bottom: 0;
+  bottom: 0%;
   right: 0;
   left: 0;
   padding: 1rem;
@@ -50,7 +50,8 @@
 .footer {
   background-color: #555;
   color: white;
-  position: absolute;
+  position: fixed;
+  bottom: 0;
   right: 0;
   left: 0;
   padding: 1rem;

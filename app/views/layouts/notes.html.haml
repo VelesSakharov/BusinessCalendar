@@ -26,8 +26,6 @@
               \#{link_to "All Notes", all_notes_notes_path}
             %li.active
               \#{link_to "Users", users_path}
-            %li.active
-              \#{link_to "Roles", roles_path}
           .nav.navbar-nav.navbar-right
             %span.glyphicon.glyphicon-log-in
               - if user_signed_in?
@@ -49,5 +47,5 @@
         .col-sm-8.text-left
           = yield
 
-  %container-fluid.footer_singlepage.text-center
+  %container-fluid.footer.text-center
     %p Hrodna, 2016-2017

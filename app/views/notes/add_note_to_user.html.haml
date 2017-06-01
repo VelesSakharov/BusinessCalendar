@@ -1,0 +1,32 @@
+%h1
+  New Note
+
+%div{class: "col-sm-8"}
+  =form_for(@note) do |f|
+  -if @note.errors.any?
+    %div{id: "error_explanation"}
+      -@note.errors.full_messages.each do |message|
+        =flash[:alert]=message
+
+  %div.field
+    =f.label :title, {class: "label label-default"}
+    =f.text_field :title, {class: 'form-control input-sm'}
+
+  %div.field
+    =f.label :content, {class: "label label-default"}
+    =f.text_area :content, {class: 'form-control input-sm'}
+
+  %div.field
+    =f.label :appointment, {class: "label label-default"}
+
+    =f.datetime_select :appointment, {class: 'form-control input-sm'}
+
+
+  %div.label
+    =f.label :email, {class: "label label-default"}
+    = f.collection_select :email, User.all, :id, :email, include_blank: true
+
+  %div.actions
+    =f.submit 'Submit', class: 'btn btn-success'
+
+  =link_to 'Back', notes_path, {class: 'btn btn-default'}

@@ -15,6 +15,7 @@ class User < ApplicationRecord
   validates_presence_of :last_name
   validates :first_name, presence: true, length: { in: 1..255 }
   validates :last_name, length: { in: 1..255 }
+  validates :head, default: false
   #
 
   def has_role?(role)

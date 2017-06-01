@@ -12,6 +12,9 @@ class Ability
     elsif user.head?
       can :read, :all
       can :create, :all
+      can :all_notes, Note do |note|
+        note.try(:user) == user
+      end
       can :update, Note do |note|
         note.try(:user) == user
       end

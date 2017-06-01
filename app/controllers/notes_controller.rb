@@ -22,6 +22,12 @@ class NotesController < ApplicationController
     @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
   end
 
+  def add_note_to_user(user_id)
+    @notes = (current_user.admin? || current_user.head? ) ? Note.all : Note.where(user_id: user_id)
+    @notes_by_date = @notes.group_by(&:date_appointment)
+    @date = params[:date] ? DateTime.parse(params[:date]) : Time.now
+  end
+
   def show
   end
 
@@ -39,7 +45,7 @@ class NotesController < ApplicationController
   def create(*args)
     @note = Note.new(note_params)
     @note.date_appointment = @note.appointment.to_date
-    @note.user_id = (args.present?) ? args : current_user.id
+    @note.user_id = note_params.fetch(:user_id).present? ? note_params.fetch(:user_id) : current_user.id
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }
@@ -83,6 +89,6 @@ class NotesController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def note_params
-    params.require(:note).permit(:title, :content, :appointment, :date, :date_appointment)
+    params.require(:note).permit(:title, :content, :appointment, :date, :date_appointment, :user_id)
   end
 end

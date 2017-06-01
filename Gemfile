@@ -21,6 +21,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'bootstrap-sass'
 gem 'haml-rails'
+gem 'simple_form'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

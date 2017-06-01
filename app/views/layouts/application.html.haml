@@ -7,6 +7,9 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
     %meta{name: "viewport", content: "width=device-width, initial-scale=1"}
+    -#%link{rel: "stylesheet", href: "https://www.w3schools.com/w3css/4/w3.css"}
+    -#%link{rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto'}
+    -#%link{rel: "stylesheet", href: "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"}
     %link{rel: "stylesheet", href: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"}
     %script {src: "https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"}
     %script {src: "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"}
@@ -26,8 +29,6 @@
               \#{link_to "All Notes", all_notes_notes_path}
             %li.active
               \#{link_to "Users", users_path}
-            %li.active
-              \#{link_to "Roles", roles_path}
           .nav.navbar-nav.navbar-right
             %span.glyphicon.glyphicon-log-in
               - if user_signed_in?
@@ -45,9 +46,10 @@
     .container-fluid.text-center
       .row.content
         .col-sm-2
+          .container-fluid
 
         .col-sm-8.text-left
           = yield
 
-  %footer.container-fluid.text-center
+  %container-fluid.footer.text-center
     %p Hrodna, 2016-2017

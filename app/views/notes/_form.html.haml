@@ -5,28 +5,29 @@
         =flash[:alert]=message
 
   %div.field
-    =f.label :title, {class: "label label-default"}
-    =f.text_field :title, {class: 'form-control input-sm'}
+    %p
+      =f.label :title, {class: "label label-default"}
+    %div
+      =f.text_field :title, {class: 'form-control input-sm'}
 
   %div.field
-    =f.label :content, {class: "label label-default"}
-    =f.text_area :content, {class: 'form-control input-sm'}
+    %p
+      =f.label :content, {class: "label label-default"}
+    %div
+      =f.text_area :content, {class: 'form-control input-sm'}
 
   %div.field
-    =f.label :appointment, {class: "label label-default"}
-    -#%br
-    -#  .row
-    -#    .form-group
-    -#      #datetimepicker1.input-group.date'
-    -#        %input.form-control{type: 'text'}
-    -#        %span.input-group-addon
-    -#          %span.glyphicon.glyphicon-calendar
-    -#    :javascript
-    -#      $(function () {
-    -#        $('#datetimepicker1').datetimepicker();
-    -#      });.container
+    %p
+      =f.label :appointment, {class: "label label-default"}
+    %div
+      =f.datetime_select :appointment, {class: 'form-control input-sm', label: 'Appointment'}
 
-    =f.datetime_select :appointment, {class: 'form-control input-sm'}
+  %div.field
+    %p
+      =f.label :user_id, {class: "label label-default"}
+    %div
+      = f.collection_select :user_id, User.all, :id, :email, include_blank: true
 
   %div.actions
     =f.submit 'Submit', class: 'btn btn-success'
+    =link_to 'Back', notes_path, {class: 'btn btn-default'}

@@ -24,5 +24,9 @@
     =f.label :password, {class: "label label-default"}
     =f.text_field :password, {class: 'form-control input-sm'}
 
+  %div.field
+    =f.label :head, {class: "label label-default"}
+    =f.check_box :head, {class: 'checkbox input-lg'}
+
   %div.actions
     =f.submit 'Submit', class: 'btn btn-success'

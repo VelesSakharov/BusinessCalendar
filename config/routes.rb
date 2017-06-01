@@ -10,7 +10,17 @@ Rails.application.routes.draw do
       get :all_notes
       get :get_user_notes
     end
+    member do
+      get :add_note_to_user
+      post :add_note_to_user
+    end
   end
+  resources :application do
+    collection do
+      post :index
+    end
+  end
+
   root to: 'notes#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

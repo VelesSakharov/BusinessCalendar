@@ -1,6 +1,5 @@
-# frozen_string_literal: true
 class UsersController < ApplicationController
-  before_filter :authenticate_user!
+  before_action :authenticate_user!
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   #load_and_authorize_resource
 
@@ -81,7 +80,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :role_id, :telegram_id)
+    params.require(:user).permit(:email, :password, :password_confirmation, :first_name, :last_name, :role_id, :telegram_id, :head)
   end
   ROLES = %i(admin).freeze
 end

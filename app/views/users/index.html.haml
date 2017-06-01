@@ -6,6 +6,7 @@
         %th Name
         %th Lastname
         %th Email
+        %th Role
         %th{:colspan => "3"}
     %tbody
       - @users.each do |user|
@@ -13,12 +14,18 @@
           %td= link_to "#{user.first_name}", notes_path
           %td= user.last_name
           %td= user.email
+          - if user.admin?
+            %td Admin
+          - elsif user.head?
+            %td Head
+          - else
+            %td User
           %td= link_to 'Show', user
           %td
             = link_to 'Edit', edit_user_path(user)
           %td
             - if can? :destroy, user
               = link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' }
-%br/
+%br
 - if can? :create, User
   = link_to 'New User', new_user_path, class: 'btn btn-default'
