@@ -22,8 +22,9 @@
           %a.navbar-brand{href: notes_path} Your Calendar
         #myNavbar.collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li.active
-              \#{link_to "All Notes", all_notes_notes_path}
+            -if current_user.admin? || current_user.head?
+              %li.active
+                \#{link_to "All Notes", all_notes_notes_path}
             %li.active
               \#{link_to "Users", users_path}
           .nav.navbar-nav.navbar-right

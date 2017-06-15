@@ -294,6 +294,7 @@ DEPENDENCIES
   rubocop
   sass-rails (~> 5.0)
   shoulda-matchers
+  sidekiq
   sidekiq-scheduler
   spring
   spring-watcher-listen (~> 2.0.0)

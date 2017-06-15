@@ -11,7 +11,7 @@
       %td Appointment:
       %td= @note.appointment
   .btn.btn-group
-    - if can? :update, @project
+    - if can? :update, @note
       = link_to 'Edit', edit_note_path(@note), class: 'btn btn-default'
     = link_to 'Back', notes_path, class: 'btn btn-default'
     - if can? :destroy, @note

@@ -24,9 +24,15 @@
     =f.label :password, {class: "label label-default"}
     =f.text_field :password, {class: 'form-control input-sm'}
 
-  %div.field
-    =f.label :head, {class: "label label-default"}
-    =f.check_box :head, {class: 'checkbox input-lg'}
+  %div
+    %left
+      -if @user.admin?
+        =f.label :admin, {class: "label label-default"}
+        =f.check_box :admin, {class: 'checkbox input-lg'}
+    %right
+      -if @user.admin? || @user.head?
+        =f.label :head, {class: "label label-default"}
+        =f.check_box :head, {class: 'checkbox input-lg'}
 
   %div.actions
     =f.submit 'Submit', class: 'btn btn-success'

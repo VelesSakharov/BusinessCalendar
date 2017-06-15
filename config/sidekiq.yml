@@ -1,7 +1,4 @@
----
-:concurrency: 25
-:pidfile: tmp/pids/sidekiq.pid
-:logfile: ./log/sidekiq.log
-:queues:
-  - default
-  - [myqueue, 2]
+:schedule:
+  send_notes:
+    cron: '0 0 * * * *'   # Runs once per hour
+    class: SendNotes

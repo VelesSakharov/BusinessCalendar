@@ -20,13 +20,13 @@
     %p
       =f.label :appointment, {class: "label label-default"}
     %div
-      =f.datetime_select :appointment, {class: 'form-control input-sm', label: 'Appointment'}
-
-  %div.field
-    %p
-      =f.label :user_id, {class: "label label-default"}
-    %div
-      = f.collection_select :user_id, User.all, :id, :email, include_blank: true
+      =f.datetime_select :appointment, {class: 'form-control input-sm', label: 'Appointment'}, default: 0.days.from_now.in_time_zone(Time.zone)
+  -if current_user.admin? || current_user.head?
+    %div.field
+      %p
+        =f.label :user_id, {class: "label label-default"}
+      %div
+        = f.collection_select :user_id, User.all, :id, :email, include_blank: true
 
   %div.actions
     =f.submit 'Submit', class: 'btn btn-success'

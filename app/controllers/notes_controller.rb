@@ -40,7 +40,7 @@ class NotesController < ApplicationController
   def create(*args)
     @note = Note.new(note_params)
     @note.date_appointment = @note.appointment.to_date
-    @note.user_id = note_params.fetch(:user_id).present? ? note_params.fetch(:user_id) : current_user.id
+    @note.user_id = note_params.has_key?(:user_id) ? note_params.fetch(:user_id) : current_user.id
     respond_to do |format|
       if @note.save
         format.html { redirect_to @note, notice: 'Note was successfully created.' }

@@ -14,11 +14,11 @@ class TelegramService
     end
     @telegram_notes
   end
-  def get_new_notes
+  def get_new_notes(user_id)
     @telegram_notes = []
-    @notes = @notes.sort_by {|obj| obj.date_appointment}
+    @notes = @notes.sort_by {|obj| obj.appointment}
     @notes.each do |note|
-      if note.appointment >= Time.now
+      if note.appointment >= Time.now && note.user_id == user_id
         @telegram_notes.push format_notes(note)
       end
     end

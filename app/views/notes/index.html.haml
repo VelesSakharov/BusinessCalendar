@@ -12,7 +12,7 @@
     - if (@notes_by_date[date])
       - @notes_by_date[date].each do |note|
         .container-fluid
-          -if note.appointment < Time.now
+          -if note.appointment < DateTime.now
             %li= note.appointment.strftime("%H:%M")
             = link_to note.title, note, {style:'color: red;', class: "css_class"}
 
